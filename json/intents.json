@@ -1,0 +1,184 @@
+{
+    "intents": [
+        {
+            "tag": "greetings",
+            "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up?", "how is it going"],
+            "responses": ["Hello!", "Hey!", "What can I do for you?"]
+        },  
+
+        {
+            "tag": "goodbye",
+            "patterns": ["bye", "goodbye", "cya", "see you", "i am done", "done", "bye bye"],
+            "responses": ["Goodbye!", "See you around!", "Bye bye!"]
+        }, 
+
+        {
+            "tag": "diagnose",
+            "patterns": [
+            "I want help diagnosing a disease", 
+            "I do not feel so well", 
+            "Something is wrong with me", 
+            "Can you help me?",
+            "I feel bad", 
+            "I need help with some symptoms", 
+            "Can i tell you my symptoms?",
+            "I don't feel good", 
+            "Can you diagnose my disease?",
+            "I am sick",
+            "I think I am sick",
+            "Can you identify my sickness?",
+            "I want to find out if i am sick",
+            "sick", 
+            "disease", 
+            "Sickness"
+            ],
+            "responses": ["I can diagnose you based on your symptoms. Please clearly state them!"]
+        }, 
+
+        {
+            "tag": "symptom",
+            "patterns": [
+                "I am itching",
+                "My skin is itching",
+                "I have rashes",
+                "I have a skin rash",
+                "I am often sneezing",
+                "I sneeze",
+                "I am sneezing",
+                "My skin is erupting",
+                "I have skin eruption",
+                "I am very cold",
+                "I am shivering",
+                "I have chills",
+                "There is pain in my joints",
+                "I have joint pain",
+                "My stomach is hurting",
+                "I have a pain in my belly",
+                "I have stomach pain",
+                "I have acidity in my stomach",
+                "My stomach is acid",
+                "I have something on my tongue",
+                "My tongue has ulcers",
+                "My muscles are wasting",
+                "I do not feel my muscles",
+                "I have burning micturition",
+                "There is something wrong with my urine",
+                "My urination is abnormal",
+                "I am feeling fatigued",
+                "I am feeling tired",
+                "I am losing weight",
+                "I suffer weight loss",
+                "I am feeling restless",
+                "I have fever",
+                "I have lost my appetite",
+                "I have gained weight",
+                "headache, red sore nose, fatigue"
+            ],
+            "responses": ["Prediction complete!"]
+        }, 
+
+        {
+            "tag": "disease_info",
+            "patterns": [
+                "I want to know more about fungal infection", 
+                "Can you tell me more about allergies?", 
+                "I want information on GERD",
+                "What is chronic cholestasis?",
+                "How can a drug reaction affect me?",
+                "What is that disease?",
+                "Can you inform me about it?",
+                "I want to know more",
+                "What is AIDS?",
+                "Is AIDS severe?",
+                "I want a description.",
+                "I want information.",
+                "I want to know more information",
+                "What can you tell me about it?",
+                "information"    
+                ],
+            "responses": [""]
+        },
+
+        {
+            "tag": "disease_precaution",
+            "patterns": [
+                "What should I do if i have fungal infection", 
+                "What are the precautions for allergies?", 
+                "What advice do you reccomend if you have GERD",
+                "I want treatment advice on chronic cholestasis?",
+                "How do I get better if I have a drug reaction?",
+                "How do I deal with it?",
+                "What do you recommend me to do?",
+                "What is the treatment?",
+                "Can you help me deal with it?",
+                "What to do if you have AIDS?",
+                "What is AIDS treatment?",    
+                "How do I treat GERD?",
+                "I want precautions",
+                "I want to know about precautions",
+                "precautions"
+                
+                ],
+            "responses": [""]
+        },
+
+        {
+            "tag": "disease_doctors",
+            "patterns": [
+                "Can you recommend me some doctors for GERD", 
+                "Where should I seek help?", 
+                "Where can I find a clinic?",
+                "Are there any clinics that treat a drug reaction?",
+                "I want to seek medical help.",
+                "What clinics treat this disease?",
+                "What department should I consult?",
+                "I want hospital recommendations.",
+                "What hospital should I go to?",
+                "Can you tell me the names of some doctors?",
+                "Can you tell me some hospitals?",
+                "I want doctors",
+                "doctors",
+                "I want hospitals",
+                "hospitals",
+                "I want departments",
+                "departments",
+                "I want to consult a doctor.",
+                "I want to go to a doctor.",
+                "I want to go to a hospital."
+                ],
+            "responses": [""]
+        },
+
+        {
+            "tag": "list_symptoms",
+            "patterns": [
+                "Show me the symptoms.",
+                "List the symptoms.", 
+                "I want to know what symptoms are available", 
+                "What symptoms can I pick?",
+                "I want to see the list of symptoms",
+                "What symptoms do I pick for prediction?",
+                "What symptoms can I choose",
+                "What symptoms do I choose for prediction?",
+                "I want you to list the symptoms."
+                ],
+            "responses": [""]
+        },
+
+        {
+            "tag": "list_diseases",
+            "patterns": [
+                "Show me the diseases.",
+                "List the diseases.", 
+                "I want to know what diseases are available", 
+                "What diseases can I pick?",
+                "I want to see the list of diseases",
+                "What diseases do I pick for prediction?",
+                "What diseases can I choose",
+                "What diseases do I choose for prediction?",
+                "I want you to list the diseases."
+                ],
+            "responses": [""]
+        }
+    ]
+}

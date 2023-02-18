@@ -1,0 +1,71 @@
+{
+    "Universitary Hospital":{
+        "departments":{
+            "cardiovascular":{
+                "doctors":["Mary Hopkins", "Dimitrie Bogza", "Marcel Tudor"],
+                "diseases":["hypertension", "heart attack", "varicose veins"]
+            },
+            "liver":{
+                "doctors":["Kelsey Freeman", "Aletha Daria", "Verity Julia"],
+                "diseases":["chronic cholestasis", "jaundice", "hepatitis a", "hepatitis b", "hepatitis c", "hepatitis d", "hepatitis e", "alcoholic hepatitis"]
+            },
+            "neurologic":{
+                "doctors":["Dana Wilmer", "Delta Leighton", "Pheobe Camille"],
+                "diseases":["migraine", "paralysis (brain hemorrhage)", "(vertigo) Paroymsal Positional Vertigo"]
+            },
+            "skin":{
+                "doctors":["Nikolas Junior", "Meryl Beau", "Dorris Shantel"],
+                "diseases":["acne", "psoriasis", "impetigo"]
+                }
+        }
+    },
+    "St. Mary Hospital":{
+        "departments":{
+        "infectious":{
+            "doctors":["Bertram Keith", "Candis Shanon", "Delilah Dorothy"],
+            "diseases":["fungal infection", "malaria", "chicken pox", "dengue", "typhoid"]
+            },
+        "sexual diseases":{
+            "doctors":["Erle Garrick", "Cori Kathlyn", "Genevieve Charisse"],
+            "diseases":["AIDS"]
+        },
+        "orthopedic":{
+            "doctors":["Dale Wiley", "Reese Bertha", "D'Arcy Sarah"],
+            "diseases":["cervical spondylosis", "osteoarthristis", "arthritis"]
+        }
+        }
+    },
+    "Urgency Hospital":{
+        "departments":{
+            "allergic":{
+                "doctors":["Kevin Madison", "Lauren Tameka", "Emmeline Alexis"],
+                "diseases":["allergy", "drug reaction"]
+            },
+            "pancreatic":{
+                "doctors":["Fisher Kurtis", "Cornelia Nona", "Rebekah Jordan"],
+                "diseases":["diabetes", "hypoglycemia"]
+            },
+            "common diseases":{
+                "doctors":["Alan Florence", "Rozanne Erma", "Myrna Schuyler"],
+                "diseases":["common cold"]
+            }
+        }
+    },
+    "Northern Hospital":{
+        "departments":{
+        "gastro":{
+            "doctors":["Jocelyn Rupert", "Ramona Catherine", "Ava Arden"],
+            "diseases":["GERD", "peptic ulcer disease", "gastroenteritis", "dimorphic hemmorhoids(piles)", "urinary tract infection"]
+            },
+        "pulmonar":{
+            "doctors":["Bennett Horatio", "Brande Evette", "Opal Phyllis"],
+            "diseases":["bronchial asthma", "tuberculosis", "pneumonia"]
+            },
+        "hormonal":{
+            "doctors":["Norman Roy", "Martha Suzanna", "Daria Kelsey"],
+            "diseases":["hypothyroidism", "hyperthyroidism"]
+            }
+        }
+    }
+
+}

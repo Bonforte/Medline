@@ -1,0 +1,14 @@
+{
+    "symptom_name_alternatives":{
+        "red skin": "skin rash",
+        "spots on skin":"skin rash",
+        "cold":"chills",
+        "shaking":"shivering",
+        "articulation":"joint pain",
+        "pee":"spotting urination",
+        "restless":"restlessness",
+        "tired": "fatigue",
+        "neck":"throat",
+        "breath":"breathlessness"
+    }
+}
