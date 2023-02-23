@@ -28,6 +28,8 @@
             "I think I am sick",
             "Can you identify my sickness?",
             "I want to find out if i am sick",
+            "Do I have a disease?",
+            "Am I sick?",
             "sick", 
             "disease", 
             "Sickness"
@@ -148,6 +150,23 @@
                 ],
             "responses": [""]
         },
+
+        {
+            "tag": "disease_to_symptoms",
+            "patterns": [
+                "What are the symptoms of this disease?", 
+                "What are the symptoms for GERD?",
+                "What are the symptoms of psoriasis?",
+                "What symptoms correspond to tuberculosis?", 
+                "What symptoms does this disease have",
+                "symptoms for psoriazis",
+                "I want to know the symptoms for this disease",
+                "I want to know the symptoms for GERD",
+                "I want information about the symptoms of tuberculosis."
+                ],
+            "responses": [""]
+        },
+
 
         {
             "tag": "list_symptoms",

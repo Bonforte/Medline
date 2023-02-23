@@ -1,3 +1,5 @@
+# File that trains and stores chatbot learning model
+
 import random
 import json
 import pickle
@@ -13,7 +15,7 @@ from tensorflow.keras.optimizers.legacy import SGD
 lemmatizer = WordNetLemmatizer()
 
 
-intents = json.loads(open('src\json\intents.json').read())
+intents = json.loads(open('json\intents.json').read())
 
 words = []
 classes = []
