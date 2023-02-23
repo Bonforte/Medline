@@ -15,24 +15,36 @@
         {
             "tag": "diagnose",
             "patterns": [
-            "I want help diagnosing a disease", 
-            "I do not feel so well", 
-            "Something is wrong with me", 
-            "Can you help me?",
-            "I feel bad", 
-            "I need help with some symptoms", 
-            "Can i tell you my symptoms?",
-            "I don't feel good", 
-            "Can you diagnose my disease?",
-            "I am sick",
-            "I think I am sick",
-            "Can you identify my sickness?",
-            "I want to find out if i am sick",
-            "Do I have a disease?",
-            "Am I sick?",
-            "sick", 
-            "disease", 
-            "Sickness"
+                "I want help diagnosing a disease", 
+                "I do not feel so well", 
+                "Something is wrong with me", 
+                "Can you help me?",
+                "I feel bad", 
+                "I need help with some symptoms", 
+                "Can i tell you my symptoms?",
+                "I don't feel good", 
+                "Can you diagnose my disease?",
+                "I am sick",
+                "I think I am sick",
+                "Can you identify my sickness?",
+                "I want to find out if i am sick",
+                "Do I have a disease?",
+                "Am I sick?",
+                "sick", 
+                "disease", 
+                "Sickness",
+                "I am sick",
+                "How can you diagnose my disease?",
+                "Please help me with my sickness.",
+                "Please help me with my disease.",
+                "I am not feeling so well.",
+                "I have some symptoms that need to be diagnosed.",
+                "I am not sure what is happening with me.",
+                "I haven't felt so well in the last days.",
+                "I need help",
+                "What is wrong with me?",
+                "I want to know what is wrong with me.",
+                "There is something wrong with me."
             ],
             "responses": ["I can diagnose you based on your symptoms. Please clearly state them!"]
         }, 
@@ -74,7 +86,12 @@
                 "I have fever",
                 "I have lost my appetite",
                 "I have gained weight",
-                "headache, red sore nose, fatigue"
+                "headache, red sore nose, fatigue",
+                "I am coughing, I have fever and I am vomiting",
+                "My symptoms are: fever, red sore and congestion",
+                "I have the following symptoms: fever, red sore and congestion",
+                "I might have the following symptoms: fever, red sore and congestion",
+                "There are some symptoms I might have: headache, red sore nose, fatigue"
             ],
             "responses": ["Prediction complete!"]
         }, 
@@ -96,7 +113,13 @@
                 "I want information.",
                 "I want to know more information",
                 "What can you tell me about it?",
-                "information"    
+                "information",
+                "Can you explain to me what is GERD",
+                "I want an explanation regarding tuberculosis",
+                "I want an explanation regarding hepatitis",
+                "Please summarize what is peptic ulcer.",
+                "Explain to me what this disease is.",
+                "I want to talk about allergies."   
                 ],
             "responses": [""]
         },
@@ -118,8 +141,11 @@
                 "How do I treat GERD?",
                 "I want precautions",
                 "I want to know about precautions",
-                "precautions"
-                
+                "precautions",
+                "How do I prevent tuberculosis?",
+                "I want to prevent paralysis",
+                "What should I do regarding tuberculosis?",
+                "What do you recommend me if I have gerd?"  
                 ],
             "responses": [""]
         },
@@ -146,7 +172,13 @@
                 "departments",
                 "I want to consult a doctor.",
                 "I want to go to a doctor.",
-                "I want to go to a hospital."
+                "I want to go to a hospital.",
+                "What hospitals treat GERD",
+                "What doctors treat GERD",
+                "I want to know the name of the doctors that treat this disease",
+                "I want to go to a hospital to treat tuberculosis",
+                "I want to consult a specialist regarding this disease",
+                "Can you give me some information about any help I can get?"
                 ],
             "responses": [""]
         },
@@ -162,7 +194,12 @@
                 "symptoms for psoriazis",
                 "I want to know the symptoms for this disease",
                 "I want to know the symptoms for GERD",
-                "I want information about the symptoms of tuberculosis."
+                "I want information about the symptoms of tuberculosis.",
+                "How does tuberculosis manifest?",
+                "How does paralysis make me feel?",
+                "Do I have GERD?",
+                "Do I have psoriasis?",
+                "I think I have a disease."
                 ],
             "responses": [""]
         },
@@ -179,7 +216,12 @@
                 "What symptoms do I pick for prediction?",
                 "What symptoms can I choose",
                 "What symptoms do I choose for prediction?",
-                "I want you to list the symptoms."
+                "I want you to list the symptoms.",
+                "What are the symptoms in your database?",
+                "How do I know what symptoms to choose?",
+                "Where do I start with listing symptoms?",
+                "How do I know what symptoms to talk about?",
+                "What symptoms do I talk about?"
                 ],
             "responses": [""]
         },
@@ -195,7 +237,11 @@
                 "What diseases do I pick for prediction?",
                 "What diseases can I choose",
                 "What diseases do I choose for prediction?",
-                "I want you to list the diseases."
+                "I want you to list the diseases.",
+                "What are the diseases in your database?",
+                "How do I know what diseases to choose?",
+                "How do I know what diseases to talk about?",
+                "What diseases do I talk about?"
                 ],
             "responses": [""]
         }
