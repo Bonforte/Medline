@@ -26,6 +26,7 @@ def training_and_data_parsing():
     symp_cols = data[data.columns[1:]].columns
 
     unique_symptoms = data_severity["Symptom"].unique()
+    symptom_to_severity = data_severity.set_index('Symptom').T.to_dict()
 
     description_to_disease = data_description.set_index('Disease').T.to_dict()
     description_to_disease =  {k.lower(): v for k, v in description_to_disease.items()}
@@ -98,4 +99,4 @@ def training_and_data_parsing():
     # print(classification_report(y_true=y_test, y_pred=result))
     # print('F1-score% =', f1_score(y_test, result, average='macro')*100, '|', 'Accuracy% =', accuracy_score(y_test, result)*100)
 
-    return randomFC, symptom_list, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
+    return randomFC, symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names

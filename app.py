@@ -18,7 +18,7 @@ from chatbot_init import clean_up_sentence, bag_of_words, predict_class, get_res
 
 
 # Load needed variables and model from training function
-randomFC, symptom_list, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
+randomFC, symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
 
 
 # Chatbot parameters initialization:
@@ -292,6 +292,11 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         txt.configure(state=DISABLED)
         txt.see(END)
 
+    severity = 0
+    for symptom in settled_symptoms:
+        
+        severity += symptom_to_severity[symptom]['weight']
+
     symptom_presence = []
     for symptom in symptom_list:
         if symptom in settled_symptoms:
@@ -314,6 +319,10 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
     else:    
         txt.configure(state=NORMAL)
         txt.insert(END, "\n" + "The detected disease is: " + output_disease)
+        if severity >= 13:
+            txt.insert(END, "\n" + "The symptoms are severe. You should consult a doctor as soon as possible")
+        else:
+            txt.insert(END, "\n" + "The symptoms are not that severe. You are still okay, but you should investigate your condition further.")
         txt.configure(state=DISABLED)
         txt.see(END)
 
