@@ -12,13 +12,14 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 
 from tkinter import *
+from tkinter import ttk
 
 from disease_training import training_and_data_parsing
 from chatbot_init import clean_up_sentence, bag_of_words, predict_class, get_response
 
 
 # Load needed variables and model from training function
-randomFC, symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
+randomFC1, randomFC2, randomFC3, model1_symptom_list, model2_symptom_list, model3_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
 
 
 # Chatbot parameters initialization:
@@ -297,18 +298,47 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         
         severity += symptom_to_severity[symptom]['weight']
 
-    symptom_presence = []
-    for symptom in symptom_list:
+    output_diseases = []
+    symptom_presence_1 = []
+    for symptom in model1_symptom_list:
         if symptom in settled_symptoms:
-            symptom_presence.append(1)
+            symptom_presence_1.append(1)
         else:
-            symptom_presence.append(0)
+            symptom_presence_1.append(0)
 
-    qw=pd.DataFrame([symptom_presence],columns=symptom_list)
+    qw=pd.DataFrame([symptom_presence_1],columns=model1_symptom_list)
     no_of_symptoms = len(settled_symptoms)
 
-    output = randomFC.predict(qw)
-    output_disease = output[0]
+    output = randomFC1.predict(qw)
+    output_diseases.append(output[0])
+
+    symptom_presence_2 = []
+    for symptom in model2_symptom_list:
+        if symptom in settled_symptoms:
+            symptom_presence_2.append(1)
+        else:
+            symptom_presence_2.append(0)
+
+    qw=pd.DataFrame([symptom_presence_2],columns=model2_symptom_list)
+    no_of_symptoms = len(settled_symptoms)
+
+    output = randomFC2.predict(qw)
+    output_diseases.append(output[0])
+
+    symptom_presence_3 = []
+    for symptom in model3_symptom_list:
+        if symptom in settled_symptoms:
+            symptom_presence_3.append(1)
+        else:
+            symptom_presence_3.append(0)
+
+    qw=pd.DataFrame([symptom_presence_3],columns=model3_symptom_list)
+    no_of_symptoms = len(settled_symptoms)
+
+    output = randomFC3.predict(qw)
+    output_diseases.append(output[0])
+
+    output_diseases = list(dict.fromkeys(output_diseases))
 
     if not no_of_symptoms:
         txt.configure(state=NORMAL)
@@ -318,7 +348,7 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         return
     else:    
         txt.configure(state=NORMAL)
-        txt.insert(END, "\n" + "The detected disease is: " + output_disease)
+        txt.insert(END, "\n" + "The detected disease is: " + (str(output_diseases) if len(output_diseases)>1 else output_diseases[0]))
         if severity >= 13:
             txt.insert(END, "\n" + "The symptoms are severe. You should consult a doctor as soon as possible")
         else:
@@ -426,6 +456,7 @@ def send():
 
 
 # Defining tkinter interface parameters
+help_info = "Here is some information I can provide: \n - predicting a disease based on your symptoms;\n - description of a disease;\n -what symptoms a disease has;\n - doctors and hospitals for a disease;\n - precautions/basic treatment for a disease;\n - list symptoms I know;\n - list diseases I know. "
 
 root = Tk()
 root.title("Chatbot")
@@ -436,15 +467,24 @@ TEXT_COLOR = "#EAECEE"
  
 FONT = "Helvetica 14"
 FONT_BOLD = "Helvetica 13 bold"
+def open_popup():
+   top= Toplevel(root)
+   top.geometry("420x220")
+   top.title("Help Window")
+   Label(top, text= help_info, font=FONT_BOLD, fg=TEXT_COLOR, bg=BG_COLOR, pady=10, anchor="w").place(relwidth=1, relheight=1)
+   top.resizable(width=False, height=False)
 
-root.title("Chat")
+root.title("Medline")
 root.resizable(width=False, height=False)
 root.configure(width=1500, height=800, bg=BG_COLOR)
 
 # head label
 label = Label(root, bg=BG_COLOR, fg=TEXT_COLOR,
-                    text="Welcome", font=FONT_BOLD, pady=10)
-label.place(relwidth=1)
+                    text="Medline - Medical Chatbot", font=(FONT_BOLD,20), pady=10, anchor="w",)
+label.place(relwidth=0.78, relx=0.02)
+
+help_button = Button(root, text= "What can you ask me?", font=(FONT_BOLD, 12), bg=BG_GRAY, command= open_popup)
+help_button.place(relx=0.84, rely=0.008, relheight=0.06, relwidth=0.15)
 
 # tiny divider
 line = Label(root, width=450, bg=BG_GRAY)
@@ -466,13 +506,13 @@ bottom_label = Label(root, bg=BG_GRAY, height=80)
 bottom_label.place(relwidth=1, rely=0.825)
 
 # message entry box
-e = Entry(bottom_label, bg="#2C3E50", fg=TEXT_COLOR, font=FONT)
-e.place(relwidth=0.74, relheight=0.06, rely=0.008, relx=0.011)
+e = Entry(bottom_label, bg="#2C3E50", fg=TEXT_COLOR, font=(FONT, 18))
+e.place(relwidth=0.85, relheight=0.1, rely=0.008, relx=0.011)
 e.focus()
 
-send = Button(bottom_label, text="Send", font=FONT_BOLD, width=20, bg=BG_GRAY,
+send = Button(bottom_label, text="Send", font=(FONT_BOLD,22), width=18, bg=BG_GRAY,
                              command=send)
-send.place(relx=0.77, rely=0.008, relheight=0.06, relwidth=0.22)
+send.place(relx=0.868, rely=0.03, relheight=0.06, relwidth=0.12)
 
  # Run tkinter interface loop
 root.mainloop()

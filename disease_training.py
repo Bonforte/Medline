@@ -7,9 +7,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 import pickle
+import random
 
 
 def training_and_data_parsing():
+    def shuffle_train(results_index, data):
+        random.shuffle(results_index)
+        for item in results_index:
+            symptom = item.strip()
+            data[f"{symptom}"] = data["symptoms"].apply(lambda x : 1 if symptom in x else 0)
+
+        y = data["disease"]
+        x = data.loc[:, ~data.columns.isin(['disease', 'symptoms'])]
+
+        # Training data for random forest model
+        x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,shuffle=True, random_state=42,stratify=y)
+        symptom_list = list(x_test.columns.values)
+        # logreg = LogisticRegression()
+        # logreg.fit(x_train, y_train)
+        randomFC = RandomForestClassifier()
+        randomFC.fit(x_train, y_train)
+
+        return randomFC, symptom_list
+
     # Disease prediction training:
 
     # Load csv and json data
@@ -74,23 +94,13 @@ def training_and_data_parsing():
     counter = Counter(values)
     results = pd.Series(dict(counter))
     results.sort_values(ascending=True)
-
-    for item in results.index:
-        symptom = item.strip()
-        data[f"{symptom}"] = data["symptoms"].apply(lambda x : 1 if symptom in x else 0)
-
-    data.drop(["symptoms"],inplace=True,axis=1)
-
-    y = data["disease"]
-    x = data.drop(['disease'],axis=1)
-
-    # Training data for random forest model
-    x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,shuffle=True, random_state=42,stratify=y)
-    symptom_list = list(x_test.columns.values)
-    # logreg = LogisticRegression()
-    # logreg.fit(x_train, y_train)
-    randomFC = RandomForestClassifier()
-    randomFC.fit(x_train, y_train)
+    
+    # Results.index trebuie randomizat pe modele diferite
+    randomFC1, model1_symptom_list = shuffle_train(list(results.index), data)
+    randomFC2, model2_symptom_list = shuffle_train(list(results.index), data)
+    randomFC3, model3_symptom_list = shuffle_train(list(results.index), data)
+    
+    
 
     # filename='rfcmodel.pkl'
     # pickle.dump(randomFC,open(filename,'wb'))
@@ -99,4 +109,6 @@ def training_and_data_parsing():
     # print(classification_report(y_true=y_test, y_pred=result))
     # print('F1-score% =', f1_score(y_test, result, average='macro')*100, '|', 'Accuracy% =', accuracy_score(y_test, result)*100)
 
-    return randomFC, symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
+    return randomFC1, randomFC2, randomFC3, model1_symptom_list, model2_symptom_list, model3_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
+
+training_and_data_parsing()
