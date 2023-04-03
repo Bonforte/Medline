@@ -39,7 +39,7 @@ def get_interest_words(message):
 
     def get_hotwords(text):
         result = []
-        pos_tag = ['PROPN', 'ADJ', 'NOUN'] 
+        pos_tag = ['PROPN', 'ADJ', 'NOUN', 'VERB'] 
         doc = nlp(text.lower()) 
         for token in doc:
             if(token.text in nlp.Defaults.stop_words or token.text in punctuation):
@@ -79,7 +79,7 @@ def get_doctors(disease):
     
     for hospital, value in doctors_json_db.items():
         for department, doctors in value.get('departments').items():
-            if disease.lower() in [x.lower() for x in doctors.get('diseases')]:
+            if disease.lower().replace(' ', '') in [x.lower().replace(' ', '') for x in doctors.get('diseases')]:
                 txt.insert(END, "\n" + 'Help can be found at ' + hospital + '.')
                 txt.insert(END, "\n" + 'It has various departments, but the one of your interest will be: ' + department + '.')
                 txt.insert(END, "\n" + 'The names of the doctors that can help you here are ' + ', '.join(doctors.get('doctors')) + '.')
@@ -261,6 +261,10 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         for symptom in unique_symptoms:
             if word in symptom:
                 detected_symptoms.append(symptom)
+            symptom_words = symptom.split(' ')
+            matching = difflib.get_close_matches(word, symptom_words)  
+            if matching:
+                detected_symptoms.append(symptom)
         if found_symptoms:
             detected_symptoms.extend(found_symptoms)
 
@@ -420,7 +424,7 @@ def send():
     tag = ints[0]['intent']
     res, probability = get_response(ints, intents)
 
-    if float(probability) < 0.9:
+    if float(probability) < 0.75:
         txt.configure(state=NORMAL)
         txt.insert(END, "\n\n" + "Medline: This task is out of my scope.")
         txt.configure(state=DISABLED)
@@ -469,10 +473,12 @@ FONT = "Helvetica 14"
 FONT_BOLD = "Helvetica 13 bold"
 def open_popup():
    top= Toplevel(root)
+   top.grab_set()
    top.geometry("420x220")
    top.title("Help Window")
    Label(top, text= help_info, font=FONT_BOLD, fg=TEXT_COLOR, bg=BG_COLOR, pady=10, anchor="w").place(relwidth=1, relheight=1)
    top.resizable(width=False, height=False)
+   
 
 root.title("Medline")
 root.resizable(width=False, height=False)
@@ -483,8 +489,10 @@ label = Label(root, bg=BG_COLOR, fg=TEXT_COLOR,
                     text="Medline - Medical Chatbot", font=(FONT_BOLD,20), pady=10, anchor="w",)
 label.place(relwidth=0.78, relx=0.02)
 
+
 help_button = Button(root, text= "What can you ask me?", font=(FONT_BOLD, 12), bg=BG_GRAY, command= open_popup)
 help_button.place(relx=0.84, rely=0.008, relheight=0.06, relwidth=0.15)
+
 
 # tiny divider
 line = Label(root, width=450, bg=BG_GRAY)

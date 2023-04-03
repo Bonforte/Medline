@@ -11,7 +11,7 @@
             },
             "neurologic":{
                 "doctors":["Dana Wilmer", "Delta Leighton", "Pheobe Camille"],
-                "diseases":["migraine", "paralysis (brain hemorrhage)", "(vertigo) Paroymsal Positional Vertigo"]
+                "diseases":["migraine", "(vertigo) paroymsal positional vertigo"]
             },
             "skin":{
                 "doctors":["Nikolas Junior", "Meryl Beau", "Dorris Shantel"],
@@ -55,7 +55,7 @@
         "departments":{
         "gastro":{
             "doctors":["Jocelyn Rupert", "Ramona Catherine", "Ava Arden"],
-            "diseases":["GERD", "peptic ulcer disease", "gastroenteritis", "dimorphic hemmorhoids(piles)", "urinary tract infection"]
+            "diseases":["GERD", "peptic ulcer disease", "gastroenteritis", "dimorphic hemorrhoids(piles)", "urinary tract infection"]
             },
         "pulmonar":{
             "doctors":["Bennett Horatio", "Brande Evette", "Opal Phyllis"],

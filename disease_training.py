@@ -25,7 +25,7 @@ def training_and_data_parsing():
         symptom_list = list(x_test.columns.values)
         # logreg = LogisticRegression()
         # logreg.fit(x_train, y_train)
-        randomFC = RandomForestClassifier()
+        randomFC = RandomForestClassifier(n_estimators=34)
         randomFC.fit(x_train, y_train)
 
         return randomFC, symptom_list
@@ -63,10 +63,14 @@ def training_and_data_parsing():
         row['symptom_8'], row['symptom_9'], row['symptom_10'], row['symptom_11'], row['symptom_12'], row['symptom_13'], row['symptom_14'], row['symptom_15'], row['symptom_16'],
         row['symptom_17']]
 
+    
+
     disease_names = []
     for key, value in description_to_disease.items():
         disease_names.append(key)
     disease_names = [disease.title() for disease in disease_names]
+
+ 
 
     # Remove special characters from disease list
     parsed_disease_names = []
@@ -94,12 +98,10 @@ def training_and_data_parsing():
     counter = Counter(values)
     results = pd.Series(dict(counter))
     results.sort_values(ascending=True)
-    
     # Results.index trebuie randomizat pe modele diferite
     randomFC1, model1_symptom_list = shuffle_train(list(results.index), data)
     randomFC2, model2_symptom_list = shuffle_train(list(results.index), data)
     randomFC3, model3_symptom_list = shuffle_train(list(results.index), data)
-    
     
 
     # filename='rfcmodel.pkl'
