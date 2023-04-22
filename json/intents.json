@@ -373,7 +373,10 @@
                 "Can you give me some information about any help I can get?",
                 "Can you give me some information about professional help?",
                 "Please give me information about professional help.",
-                "Give me information about professional help."
+                "Give me information about professional help.",
+                "What time are the doctors available?",
+                "When can I make an appointment?",
+                "What is the doctors timetable?"
                 ],
             "responses": [""]
         },

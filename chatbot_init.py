@@ -1,6 +1,8 @@
 # File that contains chatbot logic functions
 
 import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 import random
 import json

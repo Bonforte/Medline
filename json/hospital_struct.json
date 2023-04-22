@@ -1,70 +1,69 @@
 {
-    "Universitary Hospital":{
+    "Regina Maria":{
+        "link" : "https://www.reginamaria.ro/specialitati",
         "departments":{
-            "cardiovascular":{
-                "doctors":["Mary Hopkins", "Dimitrie Bogza", "Marcel Tudor"],
+            "cardiology":{
+                "doctors":["Dr. Alireza Abedini (Rated: 9.11/10)", "Dr. Adriana Alexandrescu (Rated 9.71/10)", "Dr. Janir Anefi (Rated: 9.73/10)"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
                 "diseases":["hypertension", "heart attack", "varicose veins"]
             },
-            "liver":{
-                "doctors":["Kelsey Freeman", "Aletha Daria", "Verity Julia"],
-                "diseases":["chronic cholestasis", "jaundice", "hepatitis a", "hepatitis b", "hepatitis c", "hepatitis d", "hepatitis e", "alcoholic hepatitis"]
+            "gastroenterology":{
+                "doctors":["Dr. Simona Grigoruta (Rated: 9.72/10)", "Dr. Carmen Achim (Rated: 9.72/10)", "Dr. Mahamed Adnan Ali (Rated: 9.38/10)"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["GERD", "peptic ulcer disease", "gastroenteritis", "dimorphic hemorrhoids(piles)", "urinary tract infection", "chronic cholestasis", "jaundice", "hepatitis a", "hepatitis b", "hepatitis c", "hepatitis d", "hepatitis e", "alcoholic hepatitis"]
             },
-            "neurologic":{
-                "doctors":["Dana Wilmer", "Delta Leighton", "Pheobe Camille"],
+            "diabetes and metabolical diseases":{
+                "doctors":["Dr. Ruxandra Avramescu (Rated: 9.83/10)", "Dr. Annamaria Bodo (Rated: 9.87/10)", "Dr. Adelina Brinaru (Rated: 10/10)"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["diabetes", "hypoglycemia"]
+            },
+            "neurology":{
+                "doctors":["Dr. Raluca Aldea (Rating: 9.82/10)", "Dr. Adrian Alexandrescu (Rating: 9.61/10)", "Dr. Stefan Aloman (Rating: 9.94/10)"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
                 "diseases":["migraine", "(vertigo) paroymsal positional vertigo"]
             },
-            "skin":{
-                "doctors":["Nikolas Junior", "Meryl Beau", "Dorris Shantel"],
-                "diseases":["acne", "psoriasis", "impetigo"]
+            "dermatovenerology":{
+                "doctors":["Dr. Catalina Andronic (Rating: 9.68/10)", "Dr. Daniela Angelescu (Rating: 9.58/10)", "Dr. Gabriela Anzolini (Rating: 9.25/10)"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["acne", "psoriasis", "impetigo", "AIDS"]
                 }
         }
     },
-    "St. Mary Hospital":{
+
+    "Medlife":{
+        "link": "https://www.medlife.ro/specialitati",
         "departments":{
-        "infectious":{
-            "doctors":["Bertram Keith", "Candis Shanon", "Delilah Dorothy"],
-            "diseases":["fungal infection", "malaria", "chicken pox", "dengue", "typhoid"]
+            "orthopedy":{
+                "doctors":["Dr. Anglitoiu Bogdan", "Dr. Drira Ouassim", "Dr. Vladutu Robert Adrian"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["cervical spondylosis", "osteoarthristis", "arthritis"]
             },
-        "sexual diseases":{
-            "doctors":["Erle Garrick", "Cori Kathlyn", "Genevieve Charisse"],
-            "diseases":["AIDS"]
-        },
-        "orthopedic":{
-            "doctors":["Dale Wiley", "Reese Bertha", "D'Arcy Sarah"],
-            "diseases":["cervical spondylosis", "osteoarthristis", "arthritis"]
-        }
-        }
-    },
-    "Urgency Hospital":{
-        "departments":{
-            "allergic":{
-                "doctors":["Kevin Madison", "Lauren Tameka", "Emmeline Alexis"],
+            "allergology":{
+                "doctors":["Dr. Costea-Popa Ramona", "Dr. Ciobanu Cristina-Mihaela", "Dr. Iacomi Adriana"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
                 "diseases":["allergy", "drug reaction"]
             },
-            "pancreatic":{
-                "doctors":["Fisher Kurtis", "Cornelia Nona", "Rebekah Jordan"],
-                "diseases":["diabetes", "hypoglycemia"]
-            },
-            "common diseases":{
-                "doctors":["Alan Florence", "Rozanne Erma", "Myrna Schuyler"],
+            "ORL":{
+                "doctors":["Dr. Bronescu Valeriu", "Dr. Davidescu Nicolae", "Dr. Lupescu Anemone Sorana"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
                 "diseases":["common cold"]
-            }
-        }
-    },
-    "Northern Hospital":{
-        "departments":{
-        "gastro":{
-            "doctors":["Jocelyn Rupert", "Ramona Catherine", "Ava Arden"],
-            "diseases":["GERD", "peptic ulcer disease", "gastroenteritis", "dimorphic hemorrhoids(piles)", "urinary tract infection"]
             },
-        "pulmonar":{
-            "doctors":["Bennett Horatio", "Brande Evette", "Opal Phyllis"],
-            "diseases":["bronchial asthma", "tuberculosis", "pneumonia"]
+            "pneumology":{
+                "doctors":["Dr. Andreevici Alexandru", "Dr. Cardos Laura", "Dr. Pop Monica Carmen"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["bronchial asthma", "tuberculosis", "pneumonia"]
             },
-        "hormonal":{
-            "doctors":["Norman Roy", "Martha Suzanna", "Daria Kelsey"],
-            "diseases":["hypothyroidism", "hyperthyroidism"]
+            "endocrinology":{
+                "doctors":["Dr. Bucerzan Calin-Mircea", "Dr. Stoicescu Alina Ileana", "Dr. Varciu Mihai Stelian"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["hypothyroidism", "hyperthyroidism"]
+            },
+            "infectious diseases":{
+                "doctors":["Dr. Hristea Adriana", "Dr. Constantinescu Georgeta Ileana", "Dr. Zaporojan Iulian"],
+                "appointments": ["7:00 - 14:00", "10:00 - 17:00", "12:00 - 19:00"],
+                "diseases":["fungal infection", "malaria", "chicken pox", "dengue", "typhoid"]
             }
+
         }
     }
 

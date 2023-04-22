@@ -99,9 +99,7 @@ def training_and_data_parsing():
     results = pd.Series(dict(counter))
     results.sort_values(ascending=True)
     # Results.index trebuie randomizat pe modele diferite
-    randomFC1, model1_symptom_list = shuffle_train(list(results.index), data)
-    randomFC2, model2_symptom_list = shuffle_train(list(results.index), data)
-    randomFC3, model3_symptom_list = shuffle_train(list(results.index), data)
+    randomFC, model_symptom_list = shuffle_train(list(results.index), data)
     
 
     # filename='rfcmodel.pkl'
@@ -111,6 +109,6 @@ def training_and_data_parsing():
     # print(classification_report(y_true=y_test, y_pred=result))
     # print('F1-score% =', f1_score(y_test, result, average='macro')*100, '|', 'Accuracy% =', accuracy_score(y_test, result)*100)
 
-    return randomFC1, randomFC2, randomFC3, model1_symptom_list, model2_symptom_list, model3_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
+    return randomFC, model_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
 
 training_and_data_parsing()

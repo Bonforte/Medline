@@ -7,6 +7,7 @@ import spacy
 from collections import Counter
 from string import punctuation
 import difflib
+import numpy as np
 
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
@@ -19,7 +20,7 @@ from chatbot_init import clean_up_sentence, bag_of_words, predict_class, get_res
 
 
 # Load needed variables and model from training function
-randomFC1, randomFC2, randomFC3, model1_symptom_list, model2_symptom_list, model3_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
+randomFC, model_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
 
 
 # Chatbot parameters initialization:
@@ -80,9 +81,13 @@ def get_doctors(disease):
     for hospital, value in doctors_json_db.items():
         for department, doctors in value.get('departments').items():
             if disease.lower().replace(' ', '') in [x.lower().replace(' ', '') for x in doctors.get('diseases')]:
-                txt.insert(END, "\n" + 'Help can be found at ' + hospital + '.')
+                txt.insert(END, "\n" + 'Help can be found at ' + hospital + '. ' + 'Link: ' + value['link'])
                 txt.insert(END, "\n" + 'It has various departments, but the one of your interest will be: ' + department + '.')
-                txt.insert(END, "\n" + 'The names of the doctors that can help you here are ' + ', '.join(doctors.get('doctors')) + '.')
+                doctor_list = doctors.get('doctors')
+                appointment_list = doctors.get('appointments')
+                txt.insert(END, "\n" + 'The names of the doctors that can help you here are:')
+                for i in range(len(doctor_list)):  
+                    txt.insert(END, "\n" + f'- {doctor_list[i]} ({appointment_list[i]})')
     txt.configure(state=DISABLED)
     txt.see(END)
 
@@ -273,7 +278,7 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
 
     if settled_symptoms:
         txt.configure(state=NORMAL)
-        txt.insert(END, "\n\n" + f"Medline: I have understood the following symptoms: {[symptom.replace('_', ' ') for symptom in settled_symptoms]} and recorded them")
+        txt.insert(END, "\n\n" + f"Medline: I have understood the following symptoms: {', '.join([symptom.replace('_', ' ') for symptom in settled_symptoms])} and recorded them")
         txt.configure(state=DISABLED)
         txt.see(END)
     else:
@@ -292,7 +297,7 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
 
         detected_symptoms_string = ', '.join([symptom.replace('_', ' ') for symptom in detected_symptoms])
         
-        txt.insert(END, "\n" + "If you reffered to these ones: " + detected_symptoms_string)
+        txt.insert(END, "\n" + "Symptoms you might have reffered to: " + detected_symptoms_string + '.')
         txt.insert(END, "\n" + "Please send me a message that contains all of the desired symptoms, even the ones that I have already recorded.")
         txt.configure(state=DISABLED)
         txt.see(END)
@@ -302,47 +307,25 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         
         severity += symptom_to_severity[symptom]['weight']
 
-    output_diseases = []
-    symptom_presence_1 = []
-    for symptom in model1_symptom_list:
-        if symptom in settled_symptoms:
-            symptom_presence_1.append(1)
-        else:
-            symptom_presence_1.append(0)
 
-    qw=pd.DataFrame([symptom_presence_1],columns=model1_symptom_list)
+    symptom_presence = []
+    for symptom in model_symptom_list:
+        if symptom in settled_symptoms:
+            symptom_presence.append(1)
+        else:
+            symptom_presence.append(0)
+
+    qw=pd.DataFrame([symptom_presence],columns=model_symptom_list)
     no_of_symptoms = len(settled_symptoms)
 
-    output = randomFC1.predict(qw)
-    output_diseases.append(output[0])
+    output = randomFC.predict_proba(qw)
+    prediction_classes = randomFC.classes_
+    n = 3
 
-    symptom_presence_2 = []
-    for symptom in model2_symptom_list:
-        if symptom in settled_symptoms:
-            symptom_presence_2.append(1)
-        else:
-            symptom_presence_2.append(0)
-
-    qw=pd.DataFrame([symptom_presence_2],columns=model2_symptom_list)
-    no_of_symptoms = len(settled_symptoms)
-
-    output = randomFC2.predict(qw)
-    output_diseases.append(output[0])
-
-    symptom_presence_3 = []
-    for symptom in model3_symptom_list:
-        if symptom in settled_symptoms:
-            symptom_presence_3.append(1)
-        else:
-            symptom_presence_3.append(0)
-
-    qw=pd.DataFrame([symptom_presence_3],columns=model3_symptom_list)
-    no_of_symptoms = len(settled_symptoms)
-
-    output = randomFC3.predict(qw)
-    output_diseases.append(output[0])
-
-    output_diseases = list(dict.fromkeys(output_diseases))
+    output_disease = np.argsort(output)[:,:-n-1:-1]
+    response_diseases = []
+    for index in output_disease[0]:
+        response_diseases.append(str(prediction_classes[index]))
 
     if not no_of_symptoms:
         txt.configure(state=NORMAL)
@@ -352,11 +335,11 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         return
     else:    
         txt.configure(state=NORMAL)
-        txt.insert(END, "\n" + "The detected disease is: " + (str(output_diseases) if len(output_diseases)>1 else output_diseases[0]))
+        txt.insert(END, "\n" + "The detected disease is: " + ', '.join([str(disease) for disease in response_diseases]) + '.')
         if severity >= 13:
-            txt.insert(END, "\n" + "The symptoms are severe. You should consult a doctor as soon as possible")
+            txt.insert(END, "\n" + "You should consult a doctor as soon as possible.")
         else:
-            txt.insert(END, "\n" + "The symptoms are not that severe. You are still okay, but you should investigate your condition further.")
+            txt.insert(END, "\n" + "You should go to a doctor when you have the time.")
         txt.configure(state=DISABLED)
         txt.see(END)
 
