@@ -10,7 +10,8 @@ from nltk.stem import WordNetLemmatizer
 
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, hamming_loss, f1_score
+from tensorflow.keras.metrics import Precision, AUC, Recall
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Activation, Dropout
@@ -81,7 +82,7 @@ model.add(Dropout(0.5))
 model.add(Dense(len(y_train[0]), activation='softmax'))
 
 sgd =SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=[rmse,'accuracy','mean_squared_error', 'mean_absolute_error', 'mean_absolute_percentage_error', 'cosine_proximity'])
+model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=[rmse,'accuracy', AUC(multi_label=True), 'cosine_proximity', Recall(), Precision()])
 
 hist = model.fit(np.array(x_train), np.array(y_train), epochs=200, batch_size=5, verbose=1)
 
@@ -94,11 +95,11 @@ print(y_test)
 result = confusion_matrix(y_test, y_prediction , normalize='pred')
 print(accuracy_score(y_test, y_prediction))
 print(classification_report(y_test, y_prediction))
-#pyplot.plot(hist.history['accuracy'])
 
-pyplot.plot(hist.history['cosine_proximity'])
+
+pyplot.plot(hist.history['auc'])
 pyplot.xlabel('Epochs')
-pyplot.ylabel('Cosine proximity')
+pyplot.ylabel('AUC Score')
 # pyplot.plot(hist.history['mean_absolute_error'])
 # pyplot.plot(hist.history['rmse'])
 # pyplot.plot(hist.history['mean_absolute_percentage_error'])
