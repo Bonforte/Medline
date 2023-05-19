@@ -298,7 +298,7 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         detected_symptoms_string = ', '.join([symptom.replace('_', ' ') for symptom in detected_symptoms])
         
         txt.insert(END, "\n" + "Symptoms you might have reffered to: " + detected_symptoms_string + '.')
-        txt.insert(END, "\n" + "Please send me a message that contains all of the desired symptoms, even the ones that I have already recorded.")
+        txt.insert(END, "\n" + "If you reffered to some of the symptoms above, please send me a message that contains these symptoms and the ones I recorded before.")
         txt.configure(state=DISABLED)
         txt.see(END)
 
@@ -335,7 +335,7 @@ def symptom_prediction_route(message, unique_symptoms, settled_symptoms):
         return
     else:    
         txt.configure(state=NORMAL)
-        txt.insert(END, "\n" + "The detected disease is: " + ', '.join([str(disease) for disease in response_diseases]) + '.')
+        txt.insert(END, "\n" + "Possible diseases, ordered by likelihood: " + ', '.join([str(disease) for disease in response_diseases]) + '.')
         if severity >= 13:
             txt.insert(END, "\n" + "You should consult a doctor as soon as possible.")
         else:
@@ -505,5 +505,7 @@ send = Button(bottom_label, text="Send", font=(FONT_BOLD,22), width=18, bg=BG_GR
                              command=send)
 send.place(relx=0.868, rely=0.03, relheight=0.06, relwidth=0.12)
 
+# Make fullscreen
+root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
  # Run tkinter interface loop
 root.mainloop()

@@ -126,7 +126,7 @@
                 "I might have the following symptoms: fever, red sore and congestion",
                 "There are some symptoms I might have: headache, red sore nose, fatigue"
             ],
-            "responses": ["Prediction complete!"]
+            "responses": ["Can I help you with anything else?"]
         }, 
 
         {
