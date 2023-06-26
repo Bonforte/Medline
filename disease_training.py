@@ -1,4 +1,4 @@
-# File where the training for the symptoms to disease prediction is executed
+# File where the training for the symptoms and disease prediction is executed
 
 import pandas as pd
 import json
@@ -109,6 +109,8 @@ def training_and_data_parsing():
     # print(classification_report(y_true=y_test, y_pred=result))
     # print('F1-score% =', f1_score(y_test, result, average='macro')*100, '|', 'Accuracy% =', accuracy_score(y_test, result)*100)
 
-    return randomFC, model_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
+    return randomFC, model_symptom_list, symptom_to_severity, \
+          disease_to_symptoms, description_to_disease, disease_to_precautions, \
+            doctors_json_db, parsed_disease_names, unique_symptoms, disease_names
 
 training_and_data_parsing()

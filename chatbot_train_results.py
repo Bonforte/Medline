@@ -1,4 +1,4 @@
-# File that trains and stores chatbot learning model
+# File that trains the chatbot model and plots performance indeces
 
 import random
 import json
@@ -26,20 +26,19 @@ lemmatizer = WordNetLemmatizer()
 
 intents = json.loads(open('json\intents.json').read())
 
-words = []
-classes = []
-documents = []
-ignore_letters = ['?', '!', '.', ',']
+words, documents, classes, ignore_letters = [], [], [], ['?', '!', '.', ',']
 
-for intent in intents.get('intents'):
-    for pattern in intent.get('patterns'):
-        word_list = nltk.word_tokenize(pattern)
+for i in intents.get('intents'):
+    for p in i.get('patterns'):
+        word_list = nltk.word_tokenize(p)
         words.extend(word_list)
-        documents.append((word_list, intent.get('tag')))
-        if intent.get('tag') not in classes:
-            classes.append(intent.get('tag'))
+        documents.append((word_list, i.get('tag')))
+        if i.get('tag') not in classes:
+            classes.append(i.get('tag'))
+
 
 words = [lemmatizer.lemmatize(word.lower()) for word in words if word not in ignore_letters]
+
 words = sorted(list(set(words)))
 
 classes = sorted(list(set(classes)))
@@ -83,8 +82,18 @@ model.add(Dense(len(y_train[0]), activation='softmax'))
 
 sgd =SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=[rmse,'accuracy', AUC(multi_label=True), 'cosine_proximity', Recall(), Precision()])
-
-hist = model.fit(np.array(x_train), np.array(y_train), epochs=200, batch_size=5, verbose=1)
+train_accuracy = []
+test_accuracy = []
+hist = model.fit(np.array(x_train), np.array(y_train), epochs=200, batch_size=5, verbose=1, validation_data=(np.array(x_test), np.array(y_test)))
+train_accuracy.extend(hist.history['cosine_proximity'])
+test_accuracy.extend(hist.history['val_cosine_proximity'])
+pyplot.plot(train_accuracy, label='Train Cosine Proximity')
+pyplot.plot(test_accuracy, label='Test Cosine Proximity')
+pyplot.xlabel('Epochs')
+pyplot.ylabel('Cosine Proximity')
+pyplot.title('Cosine Proximity vs Epochs')
+pyplot.legend()
+pyplot.show()
 
 print(len(x_test), len(x_test[0]), len(y_test), len(y_test[0]))
 y_prediction = model.predict(x_test)

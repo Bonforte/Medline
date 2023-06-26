@@ -20,7 +20,9 @@ from chatbot_init import clean_up_sentence, bag_of_words, predict_class, get_res
 
 
 # Load needed variables and model from training function
-randomFC, model_symptom_list, symptom_to_severity, disease_to_symptoms, description_to_disease, disease_to_precautions, doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
+randomFC, model_symptom_list, symptom_to_severity, \
+      disease_to_symptoms, description_to_disease, disease_to_precautions, \
+        doctors_json_db, parsed_disease_names, unique_symptoms, disease_names = training_and_data_parsing()
 
 
 # Chatbot parameters initialization:
@@ -443,7 +445,11 @@ def send():
 
 
 # Defining tkinter interface parameters
-help_info = "Here is some information I can provide: \n - predicting a disease based on your symptoms;\n - description of a disease;\n -what symptoms a disease has;\n - doctors and hospitals for a disease;\n - precautions/basic treatment for a disease;\n - list symptoms I know;\n - list diseases I know. "
+help_info = "Here is some information I can provide: \n" + \
+    "- predicting a disease based on your symptoms;\n" + \
+    "- description of a disease;\n -what symptoms a disease has;\n" + \
+    " - doctors and hospitals for a disease;\n - precautions/basic treatment for a disease;\n" + \
+    "- list symptoms I know;\n - list diseases I know. "
 
 root = Tk()
 root.title("Chatbot")

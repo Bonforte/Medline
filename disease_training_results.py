@@ -1,3 +1,5 @@
+#File that trains the RandomForest model and plots the performance indeces
+
 import pandas as pd
 import json
 from collections import Counter
